@@ -42,7 +42,7 @@ VENDORED_NODE="$(mktmpdir node)"
 VENDORED_NPM="$(mktmpdir npm)"
 VENDORED_SCONS="$(mktmpdir scons)"
 
-echo "----> Using bcherry's custom buildpack that uses 'npm rebuild'"
+echo "-----> Using bcherry's custom buildpack that uses 'npm rebuild'"
 
 # download and unpack packages
 echo "-----> Fetching Node.js binaries"
