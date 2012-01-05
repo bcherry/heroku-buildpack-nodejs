@@ -42,6 +42,8 @@ VENDORED_NODE="$(mktmpdir node)"
 VENDORED_NPM="$(mktmpdir npm)"
 VENDORED_SCONS="$(mktmpdir scons)"
 
+echo "----> Using bcherry's custom buildpack that uses `npm rebuild`"
+
 # download and unpack packages
 echo "-----> Fetching Node.js binaries"
 mkdir -p $VENDORED_NODE  && curl $NODE_PACKAGE -s -o -  | tar xzf - -C $VENDORED_NODE
@@ -69,7 +71,7 @@ fi
 # install dependencies with npm
 echo "-----> Installing dependencies with npm $NPM_VERSION"
 cd $BUILD_DIR
-HOME="$BUILD_DIR" $VENDORED_NODE/bin/node $VENDORED_NPM/cli.js install 2>&1 | indent
+HOME="$BUILD_DIR" $VENDORED_NODE/bin/node $VENDORED_NPM/cli.js rebuild 2>&1 | indent
 if [ "${PIPESTATUS[*]}" != "0 0" ]; then
   echo " !     Failed to install dependencies with npm"
   exit 1
